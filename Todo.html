@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Example</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="Todo.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="input-button"> 
+            <input type="text" id="input-field"  placeholder="bread"/>
+        
+            <button id="add-button" onclick="addlist()">add </button>
+        </div>
+            <ul id="shopping-list">
+
+            </ul>
+    </div>
+    <script>
+        const inputFieldEl = document.getElementById("input-field")
+        const addButtonEl = document.getElementById("add-button")
+        const shoppingListEl = document.getElementById("shopping-list")
+        function addlist () 
+        {
+            if(inputFieldEl.value == '')
+            {
+                 alert("you must write something")
+            }
+            else{
+                shoppingListEl.innerHTML += ` <li onclick="checked()">${inputFieldEl.value} <i class="fas fa-trash-alt" onclick="dellist(this)"> </i> </li>  `
+
+            }
+            inputFieldEl.value = "";
+            savedata()
+        }
+
+        function dellist(e){
+            e.parentElement.remove();
+            savedata()
+        }
+
+        function savedata()
+        {
+            localStorage.setItem("data",shoppingListEl.innerHTML);
+        }
+
+        function showlist()
+        {
+            shoppingListEl.innerHTML = localStorage.getItem("data");
+        }
+
+        showlist();
+
+    </script>
+
+</body>
+</html>
